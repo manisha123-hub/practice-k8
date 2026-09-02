@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-api
+  namespace: student-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: student-api
+
+  template:
+    metadata:
+      labels:
+        app: student-api
+
+    spec:
+      containers:
+        - name: student-api
+          image: manishanegi/student-app-api:v2
+
+          ports:
+            - containerPort: 5000
+
+          envFrom:
+            - configMapRef:
+                name: student-api-config
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /healthy
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /healthy
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
