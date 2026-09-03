@@ -43,14 +43,14 @@ spec:
 
           livenessProbe:
             httpGet:
-              path: /healthy
+              path: /health
               port: 5000
             initialDelaySeconds: 10
             periodSeconds: 10
 
           readinessProbe:
             httpGet:
-              path: /healthy
+              path: /health
               port: 5000
             initialDelaySeconds: 5
             periodSeconds: 5
