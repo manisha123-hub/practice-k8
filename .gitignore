@@ -4,3 +4,4 @@ __pycache__/
 .env
 .DS_Store
 kubernetes/secret.yaml
+kubernetes/secret.yaml
