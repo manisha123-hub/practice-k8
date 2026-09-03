@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/health")
 def health():
-   return {"status": "healthy"}, 200
+   return {"status": "healthy","version":"v3"}, 200
 
 def get_db_connection():
     return mysql.connector.connect(

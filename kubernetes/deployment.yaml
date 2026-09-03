@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: student-api
-          image: manishanegi/student-app-api:v2
+          image: manishanegi/student-app-api:v3
 
           ports:
             - containerPort: 5000
